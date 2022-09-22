@@ -39,11 +39,31 @@ public class Empleados {
         section = "Administation";
     }
 
+    public Empleados(String name, Double salary, String section) {
+        this.name = name;
+        this.salary = salary;
+        this.section = section;
+    }
+
+    public Empleados() {
+        this.name = getName();
+        this.salary = getSalary();
+        this.section = getSection();
+    }
+
     public void pujarSou (Double percentatge){
 
         double newSalary;
         newSalary = getSalary() + (getSalary()/100);
         setSalary(newSalary);
+
+    }
+
+    public void mostrarSalari (){
+        System.out.println("El salario actual de " +
+                getName() +
+                " es de " +
+                getSalary() + "€");
 
     }
 
