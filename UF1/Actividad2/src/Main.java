@@ -1,37 +1,28 @@
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            String name = obteName("Introduce tu nombre: ");
-            Integer telf = obteTelf("Introduce tu número de telefono: ");
+            LeeryEscribir newDatos = new LeeryEscribir("dades.txt");
+            String name = ObterDatos.obteName("Introduce tu nombre: ");
+            CharSequence telf = ObterDatos.obteTelf("Introduce tu número de telefono: ");
+            CharSequence mail = ObterDatos.obteMail("Introduce tu email: ");
+            String dades = name + " " + telf + " " + mail;
+            newDatos.escribir(dades);
+
         } catch (NomInvalidException e) {
             System.out.println(e.getMessage());
         } catch (NumTelfException e) {
             System.out.println(e.getMessage());
+        } catch (MailException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+
     }
 
-    private static String obteName(String missatge) throws NomInvalidException {
-        Scanner scan = new Scanner(System.in);
-        System.out.print(missatge);
-        String name = scan.nextLine();
-        if (name.isBlank()) {
-            throw new NomInvalidException("El nombre no puede estar vacio");
-        }
-        return name;
-    }
-
-    private static int obteTelf(String missatge) throws NumTelfException {
-        Scanner scan = new Scanner(System.in);
-        System.out.print(missatge);
-        String numTelf = scan.nextLine();
-        if (Integer.toString(numTelf).length() != 9) {
-            throw new NumTelfException("El número de telefono debe estar compuesto por 9 digitos");
-        }
-        if (numTelf instanceof Integer) {
-            throw new NumTelfException("El número de telefono debe estar compuesto por números");
-        }
-        return numTelf;
-    }
 }
